@@ -139,13 +139,6 @@ export class BoomboxClient extends DiscordClient {
     }
 
     public createSimpleEmbed(color: number, description: string): EmbedBuilder {
-        return new EmbedBuilder()
-            .setColor(color)
-            .setDescription(description)
-            .setFooter({
-                text: 'Created and maintained by @ZickZenni',
-                iconURL:
-                    'https://cdn.discordapp.com/avatars/464462640866000896/80a66457a10b1cc6c2893f2b568a9300.webp?size=512',
-            });
+        return new EmbedBuilder().setColor(color).setDescription(description);
     }
 }
