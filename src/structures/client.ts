@@ -13,7 +13,7 @@ import { basename, sep } from 'path';
 import { Command } from './command';
 import { VoiceHandler } from './voice';
 import { LanguageManager } from './lang';
-import { Logger } from 'logger';
+import { Logger } from '../logger';
 import chalk from 'chalk';
 
 export class BoomboxClient extends DiscordClient {

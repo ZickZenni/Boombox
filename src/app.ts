@@ -1,4 +1,4 @@
-import { BoomboxClient } from '@structures/client';
+import { BoomboxClient } from './structures/client';
 import { ActivityType, GatewayIntentBits, Partials } from 'discord.js';
 
 const client = new BoomboxClient({
