@@ -12,7 +12,7 @@ import {
     GuildTextBasedChannel,
     VoiceBasedChannel,
 } from 'discord.js';
-//import { Logger } from 'logger';
+import { Logger } from 'logger';
 
 export interface ResourceQueueItem {
     url: string;
@@ -59,7 +59,7 @@ export class VoiceConnection {
         });
         this.player = createAudioPlayer();
         this.player.on(AudioPlayerStatus.Idle, async () => {
-            //Logger.info_module('AudioPlayer', 'Stopped playing.');
+            Logger.info_module('AudioPlayer', 'Stopped playing.');
 
             this.playing = false;
             this.#currentResource = null;
@@ -71,10 +71,10 @@ export class VoiceConnection {
         });
         this.connection.subscribe(this.player);
 
-        /*Logger.info_module(
+        Logger.info_module(
             'VoiceConnection',
             `Connected to voice channel '${channel.name}' in '${guild.name}'`,
-        );*/
+        );
     }
 
     #playQueue() {
@@ -90,10 +90,10 @@ export class VoiceConnection {
         /*if (this.textChannel) {
             this.textChannel.send(`Ich spiele jetzt **${item!!.title}** ab!`);
         }*/
-        /*Logger.info_module(
+        Logger.info_module(
             'VoiceConnection::Queue',
             `Now playing '${item!!.title}'`,
-        );*/
+        );
     }
 
     queueResource(item: ResourceQueueItem) {
@@ -148,10 +148,10 @@ export class VoiceConnection {
 
         this.connection.destroy();
         this.disconnected = true;
-        /*Logger.info_module(
+        Logger.info_module(
             'VoiceHandler',
             `Disconnecting from '${this.channel.name}'`,
-        );*/
+        );
     }
 }
 
