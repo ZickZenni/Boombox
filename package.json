@@ -9,7 +9,8 @@
     "scripts": {
         "dev": "nodemon src/app.ts",
         "start": "node dist/app.js",
-        "build": "tsc"
+        "build": "tsc",
+        "authorize": "ts-node authorize.ts"
     },
     "keywords": [
         "Music",

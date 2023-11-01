@@ -17,6 +17,9 @@ import { Logger } from '../logger';
 import chalk from 'chalk';
 
 export class BoomboxClient extends DiscordClient {
+    public static readonly ErrorEmbedColor: number = 0x6b2525;
+    public static readonly SuccessEmbedColor: number = 0x46a7db;
+
     public readonly config: BotConfig;
 
     public readonly voiceHandler: VoiceHandler = new VoiceHandler();

@@ -6,7 +6,16 @@ import {
 } from '../structures/command';
 import { Languages } from '../structures/lang';
 import { GuildTextBasedChannel } from 'discord.js';
-import { video_info, yt_validate, stream_from_info } from 'play-dl';
+import {
+    video_info,
+    yt_validate,
+    stream_from_info,
+    validate,
+    refreshToken,
+    is_expired,
+    spotify,
+    search,
+} from 'play-dl';
 
 export default new Command({
     run: async (data: CommandExecutionData) => {
@@ -67,8 +76,10 @@ export default new Command({
                     ],
                 });
 
-                const url = data.messageArgs[0];
-                if (yt_validate(url) != 'video') {
+                let url = data.messageArgs[0];
+                const type = await validate(url);
+
+                if (type != 'yt_video' && type != 'sp_track') {
                     await msg.edit({
                         embeds: [
                             data.client.createSimpleEmbed(
@@ -81,6 +92,18 @@ export default new Command({
                         ],
                     });
                     return;
+                }
+
+                if (type == 'sp_track') {
+                    if (is_expired()) {
+                        await refreshToken(); // This will check if access token has expired or not. If yes, then refresh the token.
+                    }
+
+                    let spotifyData = await spotify(url);
+                    let searched = await search(spotifyData.name, {
+                        limit: 1,
+                    });
+                    url = searched[0].url;
                 }
 
                 const info = await video_info(url);

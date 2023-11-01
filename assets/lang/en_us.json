@@ -5,7 +5,7 @@
 
     "commands.play.url_required": ":x: - **A url is currently required!**",
     "commands.play.retrieving_information": ":hourglass: - **Wait, I'm currently retrieving information...**",
-    "commands.play.current_support": ":x: - **Currently only videos are supported!**",
+    "commands.play.current_support": ":x: - **Currently only videos and spotify songs are supported!**",
     "commands.play.now_playing": ":loud_sound: - **Now playing: <title>**",
     "commands.play.added_to_queue": ":white_check_mark: - **Added '<title>' to the queue!**",
 
