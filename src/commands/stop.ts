@@ -2,8 +2,8 @@ import {
     Command,
     CommandExecutionData,
     CommandExecutionType,
-} from '../structures/command';
-import { Languages } from '../structures/lang';
+} from '@structures/command';
+import { Languages } from '@structures/lang';
 
 export default new Command({
     run: async (data: CommandExecutionData) => {

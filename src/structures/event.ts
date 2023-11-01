@@ -1,5 +1,5 @@
 import { ClientEvents } from 'discord.js';
-import { BoomboxClient } from '../structures/client';
+import { BoomboxClient } from '@structures/client';
 
 export class Event<K extends keyof ClientEvents> {
     public constructor(

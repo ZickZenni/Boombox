@@ -1,43 +1,30 @@
 {
-    "name": "boombox",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.ts",
-    "engines": {
-        "node": ">=18.12.0"
-    },
-    "scripts": {
-        "dev": "nodemon src/app.ts",
-        "start": "node dist/app.js",
-        "build": "tsc"
-    },
-    "keywords": [
-        "Music",
-        "Songs",
-        "MusicPlayer"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/ZickZenni/Boombox.git"
-    },
-    "bugs": {
-        "url": "https://github.com/ZickZenni/Boombox/issues"
-    },
-    "homepage": "https://github.com/ZickZenni/Boombox#readme",
-    "author": "ZickZenni",
-    "license": "MIT",
-    "dependencies": {
-        "@discordjs/opus": "^0.9.0",
-        "@discordjs/voice": "^0.16.0",
-        "chalk": "^4.1.2",
-        "dayjs": "^1.11.10",
-        "discord.js": "^14.13.0",
-        "glob": "^10.3.10",
-        "libsodium-wrappers": "^0.7.13",
-        "play-dl": "^1.9.7"
-    },
-    "devDependencies": {
-        "nodemon": "^3.0.1",
-        "tsconfig-paths": "^4.2.0"
-    }
+  "name": "boombox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.ts",
+  "scripts": {
+    "dev": "nodemon src/app.ts"
+  },
+  "keywords": [
+    "Music",
+    "Songs",
+    "MusicPlayer"
+  ],
+  "author": "ZickZenni",
+  "license": "MIT",
+  "dependencies": {
+    "@discordjs/opus": "^0.9.0",
+    "@discordjs/voice": "^0.16.0",
+    "chalk": "^4.1.2",
+    "dayjs": "^1.11.10",
+    "discord.js": "^14.13.0",
+    "glob": "^10.3.10",
+    "libsodium-wrappers": "^0.7.13",
+    "play-dl": "^1.9.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "tsconfig-paths": "^4.2.0"
+  }
 }

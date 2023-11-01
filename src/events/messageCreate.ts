@@ -1,9 +1,9 @@
 import { Events, GuildTextBasedChannel } from 'discord.js';
-import { Event } from '../structures/event';
+import { Event } from '@structures/event';
 import {
     CommandExecutionData,
     CommandExecutionType,
-} from '../structures/command';
+} from '@structures/command';
 
 export default new Event(Events.MessageCreate, async (client, message) => {
     const { guild, channel, author, content } = message;

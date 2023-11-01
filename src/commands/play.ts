@@ -3,8 +3,8 @@ import {
     Command,
     CommandExecutionData,
     CommandExecutionType,
-} from '../structures/command';
-import { Languages } from '../structures/lang';
+} from '@structures/command';
+import { Languages } from '@structures/lang';
 import { GuildTextBasedChannel } from 'discord.js';
 import { video_info, yt_validate, stream_from_info } from 'play-dl';
 
