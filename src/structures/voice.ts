@@ -12,7 +12,7 @@ import {
     GuildTextBasedChannel,
     VoiceBasedChannel,
 } from 'discord.js';
-import { Logger } from 'logger';
+import { Logger } from '../logger';
 
 export interface ResourceQueueItem {
     url: string;
