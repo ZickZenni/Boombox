@@ -1,5 +1,5 @@
 import { ActivityType, Events, GuildTextBasedChannel } from 'discord.js';
-import { Event } from '@structures/event';
+import { Event } from '../structures/event';
 import { Logger } from 'logger';
 import chalk from 'chalk';
 

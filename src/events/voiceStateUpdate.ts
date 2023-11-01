@@ -1,5 +1,5 @@
 import { Events, VoiceState } from 'discord.js';
-import { Event } from '@structures/event';
+import { Event } from '../structures/event';
 
 export default new Event(
     Events.VoiceStateUpdate,
