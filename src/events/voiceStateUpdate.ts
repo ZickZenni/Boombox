@@ -1,5 +1,6 @@
 import { Events, VoiceState } from 'discord.js';
 import { Event } from '../structures/event';
+import { Logger } from '../logger';
 
 export default new Event(
     Events.VoiceStateUpdate,
@@ -18,18 +19,18 @@ export default new Event(
             connection.disconnect();
             client.voiceHandler.connections.delete(oldState.guild.id);
 
-            /*Logger.info_module(
+            Logger.info_module(
                 'VoiceState',
                 'Bot was disconnected and the connection has been destroyed!',
-            );*/
+            );
         } else {
             // Bot was moved
             if (connection.channel.id != newState.channel!!.id) {
                 connection.channel = newState.channel!!;
-                /*Logger.info_module(
+                Logger.info_module(
                     'VoiceState',
                     'Bot has been moved to another channel!',
-                );*/
+                );
             }
         }
     },
