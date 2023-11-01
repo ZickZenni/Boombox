@@ -1,6 +1,7 @@
 {
     "commands.music.user_not_in_voice_channel": ":x: - **You're not in a voice channel!**",
     "commands.music.bot_not_in_voice_channel": ":x: - **I'm not in a voice channel!**",
+    "commands.music.nothing_is_playing": ":x: - **I'm currently not playing anything!**",
 
     "commands.play.url_required": ":x: - **A url is currently required!**",
     "commands.play.retrieving_information": ":hourglass: - **Wait, I'm currently retrieving information...**",

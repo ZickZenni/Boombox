@@ -137,6 +137,7 @@ export default new Command({
                 );
 
                 connection?.queueResource({
+                    url: url,
                     resource: resource,
                     title: info.video_details.title ?? 'No title available',
                     requesterId: message.author.id,

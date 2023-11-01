@@ -15,6 +15,7 @@ import {
 //import { Logger } from 'logger';
 
 export interface ResourceQueueItem {
+    url: string;
     resource: AudioResource;
     title: string;
     requesterId: string;
@@ -36,6 +37,8 @@ export class VoiceConnection {
     public playing: boolean = false;
 
     public queue: Array<ResourceQueueItem> = new Array();
+
+    public playingItem: ResourceQueueItem | null = null;
 
     #currentResource: AudioResource | null = null;
 
@@ -60,6 +63,7 @@ export class VoiceConnection {
 
             this.playing = false;
             this.#currentResource = null;
+            this.playingItem = null;
 
             if (this.queue.length > 0) {
                 this.#playQueue();
@@ -79,6 +83,7 @@ export class VoiceConnection {
         }
 
         const item = this.queue.shift();
+        this.playingItem = item!!;
         this.playResource(item!!.resource, true);
 
         // Todo: Send messages when playing something from queue
