@@ -14,11 +14,16 @@ import {
 } from 'discord.js';
 import { Logger } from '../logger';
 
-export interface ResourceQueueItem {
+export interface VoiceQueueDetails {
     url: string;
-    resource: AudioResource;
     title: string;
     requesterId: string;
+    thumbnailUrl?: string | null;
+}
+
+export interface VoiceQueueItem {
+    details: VoiceQueueDetails;
+    resource: AudioResource;
 }
 
 export class VoiceConnection {
@@ -36,9 +41,9 @@ export class VoiceConnection {
 
     public playing: boolean = false;
 
-    public queue: Array<ResourceQueueItem> = new Array();
+    public queue: Array<VoiceQueueItem> = new Array();
 
-    public playingItem: ResourceQueueItem | null = null;
+    public playingItem: VoiceQueueItem | null = null;
 
     #currentResource: AudioResource | null = null;
 
@@ -91,12 +96,12 @@ export class VoiceConnection {
             this.textChannel.send(`Ich spiele jetzt **${item!!.title}** ab!`);
         }*/
         Logger.info_module(
-            'VoiceConnection::Queue',
-            `Now playing '${item!!.title}'`,
+            'AudioPlayer',
+            `Now playing '${item!!.details.title}'`,
         );
     }
 
-    queueResource(item: ResourceQueueItem) {
+    queueResource(item: VoiceQueueItem) {
         this.queue.push(item);
         this.#playQueue();
     }

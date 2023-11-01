@@ -16,6 +16,7 @@ import {
     spotify,
     search,
 } from 'play-dl';
+import { VoiceQueueItem } from 'structures/voice';
 
 export default new Command({
     run: async (data: CommandExecutionData) => {
@@ -117,22 +118,29 @@ export default new Command({
                     metadata: {},
                 });
 
+                const thumbnailUrl =
+                    info.video_details.thumbnails.length > 0
+                        ? info.video_details.thumbnails[0].url
+                        : null;
+
                 if (!connection.playing && connection.queue.length == 0) {
                     await msg.edit({
                         embeds: [
-                            data.client.createSimpleEmbed(
-                                0x46a7db,
-                                data.client.langs
-                                    .getString(
-                                        'commands.play.now_playing',
-                                        Languages.English,
-                                    )
-                                    .replace(
-                                        '<title>',
-                                        info.video_details.title ??
-                                            'No title available',
-                                    ),
-                            ),
+                            data.client
+                                .createSimpleEmbed(
+                                    0x46a7db,
+                                    data.client.langs
+                                        .getString(
+                                            'commands.play.now_playing',
+                                            Languages.English,
+                                        )
+                                        .replace(
+                                            '<title>',
+                                            info.video_details.title ??
+                                                'No title available',
+                                        ),
+                                )
+                                .setThumbnail(thumbnailUrl),
                         ],
                     });
                 } else {
@@ -159,11 +167,14 @@ export default new Command({
                     connection.calcVolume(connection.getVolume()),
                 );
 
-                connection?.queueResource({
-                    url: url,
+                connection.queueResource({
+                    details: {
+                        url: url,
+                        title: info.video_details.title ?? 'No title available',
+                        requesterId: message.author.id,
+                        thumbnailUrl: thumbnailUrl,
+                    },
                     resource: resource,
-                    title: info.video_details.title ?? 'No title available',
-                    requesterId: message.author.id,
                 });
                 break;
             }

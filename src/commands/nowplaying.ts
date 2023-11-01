@@ -50,11 +50,13 @@ export default new Command({
                         new EmbedBuilder()
                             .setTitle(':microphone2: - Now Playing')
                             .setColor(0x46a7db)
-                            .setDescription(`[${item.title}](${item.url})`)
+                            .setDescription(
+                                `[${item.details.title}](${item.details.url}`,
+                            )
                             .setFields([
                                 {
                                     name: 'Requested by:',
-                                    value: `<@${item.requesterId}>`,
+                                    value: `<@${item.details.requesterId}>`,
                                 },
                             ]),
                     ],
