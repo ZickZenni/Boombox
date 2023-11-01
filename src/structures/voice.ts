@@ -129,11 +129,11 @@ export class VoiceConnection {
     }
 
     setResourceVolume(volume: number, resource: AudioResource) {
-        resource.volume?.setVolumeLogarithmic(this.calcVolume(volume));
+        resource.volume?.setVolume(this.calcVolume(volume));
     }
 
     calcVolume(volume: number): number {
-        return ((volume * 0.5) / 100) * 0.35;
+        return ((volume * 0.5) / 100) * 0.45;
     }
 
     disconnect() {
