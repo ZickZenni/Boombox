@@ -117,7 +117,7 @@ export class BoomboxClient extends DiscordClient {
         this.user?.setPresence({
             activities: [
                 {
-                    name: `🔊 Serving music for everyone!`,
+                    name: `🔊 Serving music to everyone!`,
                     type: ActivityType.Custom,
                 },
             ],
