@@ -86,24 +86,6 @@ export class BoomboxClient extends DiscordClient {
         );
     }
 
-    // Todo: Fix crashing that "this" is not the client
-    #updatePresence() {
-        let users = 0;
-
-        this.guilds.cache.forEach((value, _) => {
-            users += value.memberCount;
-        });
-
-        this.user?.setPresence({
-            activities: [
-                {
-                    name: `🔊 Serving ${users} users!`,
-                    type: ActivityType.Custom,
-                },
-            ],
-        });
-    }
-
     public async init(): Promise<void> {
         await this.login(this.config.token);
 
@@ -125,9 +107,6 @@ export class BoomboxClient extends DiscordClient {
                 },
             ],
         });
-
-        //this.#updatePresence();
-        //setInterval(this.#updatePresence, 1000 * 60);
 
         Logger.info_module(
             'Client',

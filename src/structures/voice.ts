@@ -91,10 +91,6 @@ export class VoiceConnection {
         this.playingItem = item!!;
         this.playResource(item!!.resource, true);
 
-        // Todo: Send messages when playing something from queue
-        /*if (this.textChannel) {
-            this.textChannel.send(`Ich spiele jetzt **${item!!.title}** ab!`);
-        }*/
         Logger.info_module(
             'AudioPlayer',
             `Now playing '${item!!.details.title}'`,
@@ -131,15 +127,11 @@ export class VoiceConnection {
             return;
         }
         this.#volume = volume;
-        this.setResourceVolume(volume, this.#currentResource);
+        this.#currentResource.volume?.setVolume(this.calcVolume(volume));
     }
 
     getVolume(): number {
         return this.#volume;
-    }
-
-    setResourceVolume(volume: number, resource: AudioResource) {
-        resource.volume?.setVolume(this.calcVolume(volume));
     }
 
     calcVolume(volume: number): number {
