@@ -1,18 +1,20 @@
-import chalk from 'chalk';
+import chalk, { Chalk } from 'chalk';
 import dayjs from 'dayjs';
 
 export class Logger {
     static #log(module: string, type: string, ...args: any[]) {
-        const time = `[${chalk.blueBright(dayjs().format('HH:mm:ss.SSS'))}]`;
-        console.log(`${time} [${chalk.blueBright(module)}/${type}] >> ${args}`);
+        const time = chalk.hex('#85b569')(dayjs().format('HH:mm:ss.SSS'));
+        console.log(
+            `${time} | ${type} - ${chalk.rgb(184, 198, 175)(module)} | ${args}`,
+        );
     }
 
     static info(...args: any[]) {
-        this.#log('Default', chalk.green('Info'), args);
+        this.#log('Default', chalk.hex('#85b569')('Info'), args);
     }
 
     static info_module(module: string, ...args: any[]) {
-        this.#log(module, chalk.green('Info'), args);
+        this.#log(module, chalk.hex('#85b569')('Info'), args);
     }
 
     static warn(...args: any[]) {
