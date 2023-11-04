@@ -18,19 +18,19 @@ export class Logger {
     }
 
     static info(...args: any[]) {
-        this.#log('Default', chalk.hex('#85b569')('Info'), args);
+        this.#log('Default', chalk.hex('#85b569')('Info '), args);
     }
 
     static info_module(module: string, ...args: any[]) {
-        this.#log(module, chalk.hex('#85b569')('Info'), args);
+        this.#log(module, chalk.hex('#85b569')('Info '), args);
     }
 
     static warn(...args: any[]) {
-        this.#log('Default', chalk.yellow('Warn'), args);
+        this.#log('Default', chalk.yellow('Warn '), args);
     }
 
     static warn_module(module: string, ...args: any[]) {
-        this.#log(module, chalk.yellow('Warn'), args);
+        this.#log(module, chalk.yellow('Warn '), args);
     }
 
     static error(...args: any[]) {

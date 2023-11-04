@@ -18,6 +18,10 @@ import {
     SpotifyTrack,
 } from 'play-dl';
 import { Logger } from '../logger';
+import { Profiler } from '../structures/profiler';
+import chalk from 'chalk';
+
+const profiler = new Profiler('PlayCommand');
 
 export default new Command({
     name: 'play',
@@ -83,6 +87,11 @@ export default new Command({
                 let url = data.messageArgs[0];
                 const type = await validate(url);
 
+                Logger.debug_module(
+                    'PlayCommand',
+                    `Query type: ${chalk.yellow(type)}`,
+                );
+
                 if (type != 'yt_video' && type != 'sp_track') {
                     await msg.edit({
                         embeds: [
@@ -107,17 +116,12 @@ export default new Command({
                         await refreshToken(); // This will check if access token has expired or not. If yes, then refresh the token.
                     }
 
-                    const sp_startTime = Date.now();
+                    profiler.push('SPOTIFY_DATA_QUERY');
 
                     let spotifyData = await spotify(url);
                     let searchQuery = spotifyData.name;
 
-                    Logger.debug_module(
-                        'PlayCommand',
-                        `Queried spotify data in ${
-                            (Date.now() - sp_startTime) / 1000
-                        }ms!`,
-                    );
+                    profiler.pop('SPOTIFY_DATA_QUERY');
 
                     if (spotifyData.type === 'track') {
                         searchQuery +=
@@ -125,36 +129,30 @@ export default new Command({
                             (spotifyData as SpotifyTrack).artists[0].name;
                     }
 
-                    let yt_startTime = Date.now();
+                    profiler.push('YOUTUBE_SEARCH');
 
                     let searched = await search(searchQuery, {
                         limit: 1,
                     });
 
-                    Logger.debug_module(
-                        'PlayCommand',
-                        `Searched video in ${
-                            (Date.now() - yt_startTime) / 1000
-                        }ms!`,
-                    );
+                    profiler.pop('YOUTUBE_SEARCH');
 
                     url = searched[0].url;
                 }
 
-                let vi_startTime = Date.now();
+                profiler.push('YOUTUBE_VIDEO_INFO');
 
                 const info = await video_info(url);
 
-                Logger.debug_module(
-                    'PlayCommand',
-                    `Request of video took ${
-                        (Date.now() - vi_startTime) / 1000
-                    }ms!`,
-                );
+                profiler.pop('YOUTUBE_VIDEO_INFO');
+
+                profiler.push('STREAM_FROM_INFO');
 
                 const stream = await stream_from_info(info, {
                     quality: 0,
                 });
+
+                profiler.pop('STREAM_FROM_INFO');
 
                 const resource = createAudioResource(stream.stream, {
                     inputType: stream.type,

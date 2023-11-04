@@ -59,7 +59,7 @@ export class BoomboxClient extends DiscordClient {
 
         Logger.info_module(
             'Client',
-            chalk.greenBright(`Registered ${count} events!`),
+            chalk.yellow(`Registered ${count} events!`),
         );
     }
 
@@ -82,7 +82,7 @@ export class BoomboxClient extends DiscordClient {
 
         Logger.info_module(
             'Client',
-            chalk.greenBright(`Registered ${count} commands!`),
+            chalk.yellow(`Registered ${count} commands!`),
         );
     }
 
@@ -112,11 +112,9 @@ export class BoomboxClient extends DiscordClient {
             'Client',
             `${chalk.cyan(
                 this.user?.username,
-            )} is now online and running on ${chalk.blueBright(
+            )} is now online and running on ${chalk.yellow(
                 this.guilds.cache.size,
-            )} ${chalk.greenBright(
-                this.guilds.cache.size == 1 ? 'server' : 'servers',
-            )}!`,
+            )} ${this.guilds.cache.size == 1 ? 'server' : 'servers'}!`,
         );
     }
 
