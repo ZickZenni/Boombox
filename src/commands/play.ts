@@ -17,7 +17,7 @@ import {
     search,
     SpotifyTrack,
 } from 'play-dl';
-import { Logger } from 'logger';
+import { Logger } from '../logger';
 
 export default new Command({
     name: 'play',
@@ -144,9 +144,6 @@ export default new Command({
                 let vi_startTime = Date.now();
 
                 const info = await video_info(url);
-                const stream = await stream_from_info(info, {
-                    quality: 0,
-                });
 
                 Logger.debug_module(
                     'PlayCommand',
@@ -154,6 +151,10 @@ export default new Command({
                         (Date.now() - vi_startTime) / 1000
                     }ms!`,
                 );
+
+                const stream = await stream_from_info(info, {
+                    quality: 0,
+                });
 
                 const resource = createAudioResource(stream.stream, {
                     inputType: stream.type,
