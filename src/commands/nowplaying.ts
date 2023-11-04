@@ -7,6 +7,8 @@ import {
 import { Languages } from '../structures/lang';
 
 export default new Command({
+    name: 'nowplaying',
+    description: "See what's currently playing!",
     run: async (data: CommandExecutionData) => {
         switch (data.type) {
             case CommandExecutionType.TextMessage:

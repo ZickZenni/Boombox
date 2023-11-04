@@ -15,10 +15,13 @@ import {
     is_expired,
     spotify,
     search,
+    SpotifyTrack,
 } from 'play-dl';
-import { VoiceQueueItem } from 'structures/voice';
+import { Logger } from 'logger';
 
 export default new Command({
+    name: 'play',
+    description: 'Play some nice music!',
     run: async (data: CommandExecutionData) => {
         switch (data.type) {
             case CommandExecutionType.TextMessage: {
@@ -97,20 +100,60 @@ export default new Command({
 
                 if (type == 'sp_track') {
                     if (is_expired()) {
+                        Logger.debug_module(
+                            'Spotify',
+                            'Spotify token seems to be expired, refreshing...',
+                        );
                         await refreshToken(); // This will check if access token has expired or not. If yes, then refresh the token.
                     }
 
+                    const sp_startTime = Date.now();
+
                     let spotifyData = await spotify(url);
-                    let searched = await search(spotifyData.name, {
+                    let searchQuery = spotifyData.name;
+
+                    Logger.debug_module(
+                        'PlayCommand',
+                        `Queried spotify data in ${
+                            (Date.now() - sp_startTime) / 1000
+                        }ms!`,
+                    );
+
+                    if (spotifyData.type === 'track') {
+                        searchQuery +=
+                            ' - ' +
+                            (spotifyData as SpotifyTrack).artists[0].name;
+                    }
+
+                    let yt_startTime = Date.now();
+
+                    let searched = await search(searchQuery, {
                         limit: 1,
                     });
+
+                    Logger.debug_module(
+                        'PlayCommand',
+                        `Searched video in ${
+                            (Date.now() - yt_startTime) / 1000
+                        }ms!`,
+                    );
+
                     url = searched[0].url;
                 }
+
+                let vi_startTime = Date.now();
 
                 const info = await video_info(url);
                 const stream = await stream_from_info(info, {
                     quality: 0,
                 });
+
+                Logger.debug_module(
+                    'PlayCommand',
+                    `Request of video took ${
+                        (Date.now() - vi_startTime) / 1000
+                    }ms!`,
+                );
 
                 const resource = createAudioResource(stream.stream, {
                     inputType: stream.type,

@@ -43,13 +43,19 @@ export class CommandExecutionData {
 }
 
 interface CommandOptions {
+    name: string;
+    description: string;
     run: (data: CommandExecutionData) => void;
 }
 
 export class Command {
+    public name: string;
+    public description: string;
     public run: (data: CommandExecutionData) => void;
 
     public constructor(options: CommandOptions) {
+        this.name = options.name;
+        this.description = options.description;
         this.run = options.run;
     }
 }

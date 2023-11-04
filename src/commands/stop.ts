@@ -6,6 +6,8 @@ import {
 import { Languages } from '../structures/lang';
 
 export default new Command({
+    name: 'stop',
+    description: 'Stop the music and leave!',
     run: async (data: CommandExecutionData) => {
         switch (data.type) {
             case CommandExecutionType.TextMessage:

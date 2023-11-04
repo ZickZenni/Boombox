@@ -14,11 +14,11 @@ export default new Event(Events.MessageCreate, async (client, message) => {
 
     const commandName = content.substring(1).split(' ')[0];
 
-    const command = client.commands.get(commandName) as any;
+    const command = client.commands.get(commandName);
 
     if (!command) return;
 
-    command.default.run(
+    command.run(
         new CommandExecutionData(
             client,
             content,

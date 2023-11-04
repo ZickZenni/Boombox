@@ -74,7 +74,7 @@ export class BoomboxClient extends DiscordClient {
             name = name.substring(0, name.lastIndexOf('.')) || name;
 
             const command = (await import(f)) as Command;
-            this.commands.set(name, command);
+            this.commands.set(name, (command as any).default);
             count++;
 
             Logger.info_module('Client', `Registered command: ${name}`);

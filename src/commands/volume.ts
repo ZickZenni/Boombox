@@ -6,6 +6,8 @@ import {
 import { Languages } from '../structures/lang';
 
 export default new Command({
+    name: 'volume',
+    description: 'Set the volume from the incoming music!',
     run: async (data: CommandExecutionData) => {
         switch (data.type) {
             case CommandExecutionType.TextMessage:
