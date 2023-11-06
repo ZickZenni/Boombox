@@ -8,8 +8,9 @@
     },
     "scripts": {
         "dev": "nodemon src/app.ts",
-        "start": "node dist/app.js",
-        "build": "tsc",
+        "start": "ts-node src/app.ts",
+        "build": "tsc --build",
+        "prod": "npm run build && node dist/app.ts",
         "authorize": "ts-node authorize.ts"
     },
     "keywords": [
