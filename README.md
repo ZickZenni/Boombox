@@ -23,12 +23,12 @@
 ### Installation:
 
 ```sh
-git clone https://github.com/zickzenni/BoomBox.git
-cd BoomBox
+git clone https://github.com/zickzenni/Boombox.git
+cd Boombox
 npm install
 ```
 
-After installation finishes follow [configuration instructions][#Configuration] then run `npm run start` to start the bot.
+After installation finishes follow [configuration instructions](#Configuration) then run `npm run start` to start the bot.
 
 ## Configuration
 
